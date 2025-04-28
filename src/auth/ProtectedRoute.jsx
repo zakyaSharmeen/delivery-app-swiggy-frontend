@@ -3,11 +3,16 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 function ProtectedRoute() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
 
-  return (
-    <div>{isAuthenticated ? <Outlet /> : <Navigate to="/" replace />}</div>
-  );
+  if (isLoading) {
+    return null;
+  }
+  if (isAuthenticated) {
+    return <Outlet />;
+  }
+
+  return <Navigate to="/" replace />;
 }
 
 export default ProtectedRoute;
