@@ -16,8 +16,9 @@ const Auth0ProviderWithNavigate = ({ children }) => {
     throw new Error("Unable to initialize Auth0");
   }
 
-  const onRedirectCallback = () => {
-    navigate("/auth-callback");
+  const onRedirectCallback = (appState) => {
+    // navigate("/auth-callback");
+    navigate(appState?.returnTo || "/auth-callback");
   };
 
   return (
